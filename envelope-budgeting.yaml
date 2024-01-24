@@ -9,6 +9,11 @@ info:
   license:
     name: TODO
     url: http://TODO
+externalDocs:
+  description: Find out more about our budgeting API
+  url: http://TODO
+servers:
+  - url: http://TODO
 tags:
   - name: envelope
     description: Manage your envelopes
@@ -16,3 +21,46 @@ tags:
       description: TODO
       url: http://TODO
 paths:
+  /envelope:
+    get:
+      tags:
+        - envelope
+      summary: Get all the envelopes
+      description: "Returns an array of all the envelope ids"
+      operationId: getListOfEnvelopeIds
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Envelope'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Envelope'
+
+components:
+  schemas:
+    Envelope:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 123456
+        envelopeName:
+          type: string
+          example: utilities
+        dollarsInEnvelope:
+          type: integer
+          format: int64
+          example: 300
+        centsInEnvelope:
+          type: integer
+          format: int32
+          example: 15
+          
