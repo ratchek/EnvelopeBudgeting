@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info:
+  description: "An API for an envelope-based budgeting system. You can read more about the idea behind this here: [https://www.investopedia.com/envelope-budgeting-system-5208026](https://web.archive.org/web/20240124192318/https://www.investopedia.com/envelope-budgeting-system-5208026)"
+  version: 0.0.1
+  title: Envelope Budgeting
+  termsOfService: http://TODO
+  contact:
+    email: mail@ratchek.com
+  license:
+    name: TODO
+    url: http://TODO
+tags:
+  - name: envelope
+    description: Manage your envelopes
+    externalDocs:
+      description: TODO
+      url: http://TODO
+paths:
