@@ -21,7 +21,7 @@ tags:
       description: TODO
       url: http://TODO
 paths:
-  /envelope:
+  /envelopes:
     get:
       tags:
         - envelope
@@ -70,7 +70,7 @@ paths:
                 $ref: '#/components/schemas/Envelope'
         '400':
           description: Invalid envelope supplied
-  /envelope/{envelopeID}:
+  /envelopes/{envelopeID}:
     get:
       tags:
         - envelope
