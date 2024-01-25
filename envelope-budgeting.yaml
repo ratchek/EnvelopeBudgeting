@@ -70,6 +70,94 @@ paths:
                 $ref: '#/components/schemas/Envelope'
         '400':
           description: Invalid envelope supplied
+  /envelope/{envelopeID}:
+    get:
+      tags:
+        - envelope
+      summary: Get envelope by ID
+      description: Returns a single envelope
+      operationId: getEnvelopeById
+      parameters:
+        - name: envelopeID
+          in: path
+          description: ID of envelope to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Envelope not found
+    put:
+      tags:
+        - envelope
+      summary: Update an existing envelope
+      description: Updates an existing envelope with the given name and amount
+      operationId: updateEnvelopebyId
+      parameters:
+        - name: envelopeID
+          in: path
+          description: ID of envelope to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Envelope object that needs to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Envelope'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Envelope'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Envelope not found
+    delete:
+      tags:
+        - envelope
+      summary: Delete an envelope
+      description: Deletes an envelope
+      operationId: deleteEnvelopebyID
+      parameters:
+        - name: envelopeID
+          in: path
+          description: ID of envelope to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Envelope not found
 
 components:
   schemas:
