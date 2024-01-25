@@ -42,6 +42,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Envelope'
+    post:
+      tags:
+        - envelope
+      summary: Create a new envelope
+      description: Creates a new envelope with the given name and amount
+      operationId: createEnvelope
+      requestBody:
+        description: Envelope object that needs to be added to the system
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Envelope'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Envelope'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '400':
+          description: Invalid envelope supplied
 
 components:
   schemas:
