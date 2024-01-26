@@ -25,6 +25,11 @@ tags:
     externalDocs:
       description: TODO
       url: http://TODO
+  - name: fill
+    description: Add funds to one of your envelopes
+    externalDocs:
+      description: TODO
+      url: http://TODO
 paths:
   /envelopes:
     get:
@@ -34,19 +39,19 @@ paths:
       description: Returns an array of all the envelopes
       operationId: getListOfEnvelopes
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Envelope'          
+                  $ref: "#/components/schemas/Envelope"
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Envelope'
+                  $ref: "#/components/schemas/Envelope"
     post:
       tags:
         - envelope
@@ -59,21 +64,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Envelope'
+              $ref: "#/components/schemas/Envelope"
           application/xml:
             schema:
-              $ref: '#/components/schemas/Envelope'
+              $ref: "#/components/schemas/Envelope"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Envelope'
+                $ref: "#/components/schemas/Envelope"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Envelope'
-        '400':
+                $ref: "#/components/schemas/Envelope"
+        "400":
           description: Invalid envelope supplied
   /envelopes/{envelopeID}:
     get:
@@ -91,18 +96,18 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Envelope'
+                $ref: "#/components/schemas/Envelope"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Envelope'
-        '400':
+                $ref: "#/components/schemas/Envelope"
+        "400":
           description: Invalid ID supplied
-        '404':
+        "404":
           description: Envelope not found
     put:
       tags:
@@ -124,23 +129,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Envelope'
+              $ref: "#/components/schemas/Envelope"
           application/xml:
             schema:
-              $ref: '#/components/schemas/Envelope'
+              $ref: "#/components/schemas/Envelope"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Envelope'
+                $ref: "#/components/schemas/Envelope"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Envelope'
-        '400':
+                $ref: "#/components/schemas/Envelope"
+        "400":
           description: Invalid ID supplied
-        '404':
+        "404":
           description: Envelope not found
     delete:
       tags:
@@ -157,11 +162,11 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successful operation
-        '400':
+        "400":
           description: Invalid ID supplied
-        '404':
+        "404":
           description: Envelope not found
   /transactions:
     get:
@@ -171,19 +176,19 @@ paths:
       description: Returns an array of all the transactions
       operationId: getListOfTransactions
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Transaction'          
+                  $ref: "#/components/schemas/Transaction"
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Transaction'
+                  $ref: "#/components/schemas/Transaction"
     post:
       tags:
         - transaction
@@ -196,21 +201,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              $ref: "#/components/schemas/Transaction"
           application/xml:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              $ref: "#/components/schemas/Transaction"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                $ref: "#/components/schemas/Transaction"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Transaction'
-        '400':
+                $ref: "#/components/schemas/Transaction"
+        "400":
           description: Invalid transaction supplied
   /transactions/{transactionID}:
     get:
@@ -228,18 +233,18 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                $ref: "#/components/schemas/Transaction"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Transaction'
-        '400':
+                $ref: "#/components/schemas/Transaction"
+        "400":
           description: Invalid ID supplied
-        '404':
+        "404":
           description: Transaction not found
     put:
       tags:
@@ -261,23 +266,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              $ref: "#/components/schemas/Transaction"
           application/xml:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              $ref: "#/components/schemas/Transaction"
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                $ref: "#/components/schemas/Transaction"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Transaction'
-        '400':
+                $ref: "#/components/schemas/Transaction"
+        "400":
           description: Invalid ID supplied
-        '404':
+        "404":
           description: Transaction not found
     delete:
       tags:
@@ -294,12 +299,149 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successful operation
-        '400':
+        "400":
           description: Invalid ID supplied
-        '404':
+        "404":
           description: Transaction not found
+  /fills:
+    get:
+      tags:
+        - fill
+      summary: Get all the fills
+      description: Returns an array of all the fills
+      operationId: getListOfFills
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Fill"
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Fill"
+    post:
+      tags:
+        - fill
+      summary: Create a new fill
+      description: Creates a new fill in an envelope with the given name, amount, dollars/cents added, date, and notes
+      operationId: createFill
+      requestBody:
+        description: A fill object that needs to be added to the system
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Fill"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/Fill"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fill"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Fill"
+        "400":
+          description: Invalid fill supplied
+  /fills/{fillID}:
+    get:
+      tags:
+        - fill
+      summary: Get fill by ID
+      description: Returns a single fill
+      operationId: getFillById
+      parameters:
+        - name: fillID
+          in: path
+          description: ID of fill to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fill"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Fill"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Fill not found
+    put:
+      tags:
+        - fill
+      summary: Update an existing fill
+      description: Updates an existing fill with the given name, amount, dollars/cents added, date, and notes
+      operationId: updateFillbyId
+      parameters:
+        - name: fillID
+          in: path
+          description: ID of fill to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Fill object that needs to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Fill"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/Fill"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fill"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Fill"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Fill not found
+    delete:
+      tags:
+        - fill
+      summary: Delete a fill
+      description: Deletes a fill
+      operationId: deleteFillbyID
+      parameters:
+        - name: fillID
+          in: path
+          description: ID of fill to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Fill not found
 
 components:
   schemas:
@@ -346,7 +488,32 @@ components:
         date:
           type: string
           format: date
-          example: 2022-01-01
+          example: 2024-01-01
+        notes:
+          type: string
+          example: paid with credit card
+    Fill:
+      type: object
+      properties:
+        envelopeID:
+          type: integer
+          format: int64
+          example: 123456
+        fillname:
+          type: string
+          example: salary deposit
+        dollarsAdded:
+          type: integer
+          format: int64
+          example: 100
+        centsAdded:
+          type: integer
+          format: int32
+          example: 0
+        date:
+          type: string
+          format: date
+          example: 2024-01-01
         notes:
           type: string
           example: paid with credit card
