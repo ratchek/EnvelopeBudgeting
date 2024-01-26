@@ -21,7 +21,7 @@ tags:
       description: TODO
       url: http://TODO
   - name: transaction
-    description: Manage your transactions
+    description: Spend funds from one of your envelopes
     externalDocs:
       description: TODO
       url: http://TODO
