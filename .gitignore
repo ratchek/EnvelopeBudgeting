@@ -1,1 +1,6 @@
 *.swp
+env/
+staticfiles/
+settings.ini
+*.pyc
+db.sqlite3
