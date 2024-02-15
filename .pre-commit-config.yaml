@@ -67,4 +67,3 @@ repos:
   #   rev: v14.2.0
   #   hooks:
   #     - id: stylelint
-
