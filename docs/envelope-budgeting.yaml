@@ -452,7 +452,7 @@ components:
           type: integer
           format: int64
           example: 123456
-        envelopeName:
+        name:
           type: string
           example: utilities
         dollarsInEnvelope:
@@ -474,7 +474,7 @@ components:
           type: integer
           format: int64
           example: 123456
-        transactionName:
+        name:
           type: string
           example: electric bill
         dollarsSpent:
@@ -503,7 +503,7 @@ components:
           type: integer
           format: int64
           example: 123456
-        fillname:
+        name:
           type: string
           example: salary deposit
         dollarsAdded:
