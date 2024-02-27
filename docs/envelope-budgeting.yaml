@@ -463,6 +463,10 @@ components:
           type: integer
           format: int32
           example: 15
+        user:
+          type: integer
+          format: int32
+          example: 2
     Transaction:
       type: object
       properties:
