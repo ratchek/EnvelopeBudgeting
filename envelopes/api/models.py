@@ -24,9 +24,11 @@ class Envelope(models.Model):
 # A transaction is a record of money being spent from an envelope. It has a date, an amount, a name, notes, and a reference to the envelope it came from.
 class Transaction(models.Model):
     date = models.DateField()
-    amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    amount = models.DecimalField(
+        max_digits=10, decimal_places=2, validators=[MinValueValidator(0)]
+    )
     name = models.CharField(max_length=100)
-    notes = models.TextField()
+    notes = models.TextField(blank=True)
     envelope = models.ForeignKey(Envelope, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -36,9 +38,11 @@ class Transaction(models.Model):
 # A fill is a record of money being added to an envelope. It has a date, an amount, a name, notes, and a reference to the envelope it came from.
 class Fill(models.Model):
     date = models.DateField()
-    amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    amount = models.DecimalField(
+        max_digits=10, decimal_places=2, validators=[MinValueValidator(0)]
+    )
     name = models.CharField(max_length=100)
-    notes = models.TextField()
+    notes = models.TextField(blank=True)
     envelope = models.ForeignKey(Envelope, on_delete=models.CASCADE)
 
     def __str__(self):
