@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -23,22 +24,22 @@ class Envelope(models.Model):
 # A transaction is a record of money being spent from an envelope. It has a date, an amount, a name, notes, and a reference to the envelope it came from.
 class Transaction(models.Model):
     date = models.DateField()
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     name = models.CharField(max_length=100)
     notes = models.TextField()
     envelope = models.ForeignKey(Envelope, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.description
+        return f"{self.name} - {self.envelope.user} - {self.date}"
 
 
 # A fill is a record of money being added to an envelope. It has a date, an amount, a name, notes, and a reference to the envelope it came from.
 class Fill(models.Model):
     date = models.DateField()
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     name = models.CharField(max_length=100)
     notes = models.TextField()
     envelope = models.ForeignKey(Envelope, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.description
+        return f"{self.name} - {self.envelope.user} - {self.date}"
