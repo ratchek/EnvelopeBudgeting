@@ -1,3 +1,27 @@
-Make API follow docs in splitting the total amounts into dollars and cents
 
 Check if API follows specs in docs
+- [ ] Make API follow docs in splitting the total amounts into dollars and cents
+
+
+
+Check that permissions are properly configured:
+    Check that a user cannot:
+    - [ ] List a different user's envelopes
+    - [ ] Create an envelope for a different user
+    - [ ] View a different user's envelope
+    - [ ] Update a different user's envelope
+    - [ ] Delete a different user's envelope
+
+    - [ ] List a different user's fills
+    - [ ] Create an fill for a different user
+    - [ ] View a different user's fill
+    - [ ] Update a different user's fill
+    - [ ] Delete a different user's fill
+
+    - [ ] List a different user's transactions
+    - [ ] Create an transaction for a different user
+    - [ ] View a different user's transaction
+    - [ ] Update a different user's transaction
+    - [ ] Delete a different user's transaction
+
+- [x] Check that only authenticated users can access API
