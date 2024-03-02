@@ -8,7 +8,6 @@ cd EnvelopeBudgeting/
 python3 -m venv --prompt envelopes env
 source env/bin/activate
 pip install -r requirements_dev.txt
-cd envelopes/
 ./manage.py collectstatic
 ./manage.py migrate
 ./manage.py createsuperuser
