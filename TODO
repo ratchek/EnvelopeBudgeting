@@ -6,21 +6,21 @@ Check if API follows specs in docs
 
 Check that permissions are properly configured:
     Check that a user cannot:
-    - [ ] List a different user's envelopes
+    - [x] List a different user's envelopes
     - [ ] Create an envelope for a different user
-    - [ ] View a different user's envelope
+    - [x] View a different user's envelope
     - [ ] Update a different user's envelope
     - [ ] Delete a different user's envelope
 
-    - [ ] List a different user's fills
+    - [x] List a different user's fills
     - [ ] Create an fill for a different user
-    - [ ] View a different user's fill
+    - [x] View a different user's fill
     - [ ] Update a different user's fill
     - [ ] Delete a different user's fill
 
-    - [ ] List a different user's transactions
+    - [x] List a different user's transactions
     - [ ] Create an transaction for a different user
-    - [ ] View a different user's transaction
+    - [x] View a different user's transaction
     - [ ] Update a different user's transaction
     - [ ] Delete a different user's transaction
 
