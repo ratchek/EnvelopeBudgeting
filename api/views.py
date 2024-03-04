@@ -19,42 +19,42 @@ def api_root(request, format=None):
 
 
 class EnvelopeList(generics.ListCreateAPIView):
+    serializer_class = EnvelopeSerializer
+
     def get_queryset(self):
         return Envelope.objects.filter(user=self.request.user)
-
-    serializer_class = EnvelopeSerializer
 
 
 class EnvelopeDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = EnvelopeSerializer
+
     def get_queryset(self):
         return Envelope.objects.filter(user=self.request.user)
 
-    serializer_class = EnvelopeSerializer
-
 
 class TransactionList(generics.ListCreateAPIView):
+    serializer_class = TransactionSerializer
+
     def get_queryset(self):
         return Transaction.objects.filter(envelope__user=self.request.user)
-
-    serializer_class = TransactionSerializer
 
 
 class TransactionDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TransactionSerializer
+
     def get_queryset(self):
         return Transaction.objects.filter(envelope__user=self.request.user)
 
-    serializer_class = TransactionSerializer
-
 
 class FillList(generics.ListCreateAPIView):
+    serializer_class = FillSerializer
+
     def get_queryset(self):
         return Fill.objects.filter(envelope__user=self.request.user)
-
-    serializer_class = FillSerializer
 
 
 class FillDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = FillSerializer
+
     def get_queryset(self):
         return Fill.objects.filter(envelope__user=self.request.user)
-
-    serializer_class = FillSerializer
