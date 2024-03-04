@@ -25,3 +25,7 @@ Check that permissions are properly configured:
     - [ ] Delete a different user's transaction
 
 - [x] Check that only authenticated users can access API
+
+
+- [ ] Allow user to create envelopes without passing the user id explicitly
+- [ ] Modify docs and add tests to be in line with the above
