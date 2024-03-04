@@ -4,6 +4,8 @@ from .models import Envelope, Fill, Transaction
 
 
 class EnvelopeSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source="user.username")
+
     class Meta:
         model = Envelope
         fields = "__all__"

@@ -24,6 +24,9 @@ class EnvelopeList(generics.ListCreateAPIView):
     def get_queryset(self):
         return Envelope.objects.filter(user=self.request.user)
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class EnvelopeDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = EnvelopeSerializer
