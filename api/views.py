@@ -62,6 +62,11 @@ class FillList(generics.ListCreateAPIView):
     def get_queryset(self):
         return Fill.objects.filter(envelope__user=self.request.user)
 
+    def perform_create(self, serializer):
+        if serializer.validated_data["envelope"].user != self.request.user:
+            raise exceptions.PermissionDenied("User must own envelope to create fill.")
+        serializer.save()
+
 
 class FillDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = FillSerializer

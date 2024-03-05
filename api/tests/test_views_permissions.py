@@ -395,3 +395,156 @@ class FillGETPermissionsTestCase(TestCase):
         self.client.login(username="testuser2", password="12345")
         response = self.client.get(f"/fills/{self.fill.id}/")
         self.assertEqual(response.status_code, 404)
+
+
+class FillPOSTPermissionsTestCase(TestCase):
+    def setUp(self):
+        self.user1 = get_user_model().objects.create_user(
+            username="testuser1", password="12345"
+        )
+        self.user2 = get_user_model().objects.create_user(
+            username="testuser2", password="12345"
+        )
+        self.envelope = Envelope.objects.create(
+            name="test", total=100.00, user=self.user1
+        )
+        self.client = Client()
+
+    def test_user_can_create_fill(self):
+        self.client.login(username="testuser1", password="12345")
+        response = self.client.post(
+            "/fills/",
+            {
+                "date": "2020-01-01",
+                "amount": 50.00,
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+        )
+        self.assertEqual(response.status_code, 201)
+
+    def test_unauthenticated_user_cannot_create_fill(self):
+        response = self.client.post(
+            "/fills/",
+            {
+                "date": "2020-01-01",
+                "amount": 50.00,
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_other_user_cannot_create_fill(self):
+        self.client.login(username="testuser2", password="12345")
+        response = self.client.post(
+            "/fills/",
+            {
+                "date": "2020-01-01",
+                "amount": 50.00,
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+        )
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(self.envelope.fills.count(), 0)
+
+
+class FillPUTPermissionsTestCase(TestCase):
+    def setUp(self):
+        self.user1 = get_user_model().objects.create_user(
+            username="testuser1", password="12345"
+        )
+        self.user2 = get_user_model().objects.create_user(
+            username="testuser2", password="12345"
+        )
+        self.envelope = Envelope.objects.create(
+            name="test", total=100.00, user=self.user1
+        )
+        self.fill = Fill.objects.create(
+            date="2020-01-01",
+            amount=50.00,
+            name="test",
+            envelope=self.envelope,
+            notes="test",
+        )
+        self.client = Client()
+
+    def test_user_can_update_own_fill(self):
+        self.client.login(username="testuser1", password="12345")
+        response = self.client.put(
+            f"/fills/{self.fill.id}/",
+            {
+                "date": "2020-01-01",
+                "amount": "100.00",
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.fill.refresh_from_db()
+        self.assertEqual(self.fill.amount, 100.00)
+
+    def test_unauthenticated_user_cannot_update_fill(self):
+        response = self.client.put(
+            f"/fills/{self.fill.id}/",
+            {
+                "date": "2020-01-01",
+                "amount": "100.00",
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_other_user_cannot_update_fill(self):
+        self.client.login(username="testuser2", password="12345")
+        response = self.client.put(
+            f"/fills/{self.fill.id}/",
+            {
+                "date": "2020-01-01",
+                "amount": "100.00",
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 404)
+
+
+class FillDELETEPermissionsTestCase(TestCase):
+    def setUp(self):
+        self.user1 = get_user_model().objects.create_user(
+            username="testuser1", password="12345"
+        )
+        self.user2 = get_user_model().objects.create_user(
+            username="testuser2", password="12345"
+        )
+        self.envelope = Envelope.objects.create(
+            name="test", total=100.00, user=self.user1
+        )
+        self.fill = Fill.objects.create(
+            date="2020-01-01",
+            amount=50.00,
+            name="test",
+            envelope=self.envelope,
+            notes="test",
+        )
+        self.client = Client()
+
+    def test_user_can_delete_own_fill(self):
+        self.client.login(username="testuser1", password="12345")
+        response = self.client.delete(f"/fills/{self.fill.id}/")
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(Fill.objects.count(), 0)
+
+    def test_unauthenticated_user_cannot_delete_fill(self):
+        response = self.client.delete(f"/fills/{self.fill.id}/")
+        self.assertEqual(response.status_code, 403)
+
+    def test_other_user_cannot_delete_fill(self):
+        self.client.login(username="testuser2", password="12345")
+        response = self.client.delete(f"/fills/{self.fill.id}/")
+        self.assertEqual(response.status_code, 404)
