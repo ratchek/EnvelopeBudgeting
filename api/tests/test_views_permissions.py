@@ -62,7 +62,9 @@ class EnvelopePOSTPermissionsTestCase(TestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_unauthenticated_user_cannot_create_envelope(self):
-        response = self.client.post("/envelopes/", {"name": "test", "total": 100.00})
+        response = self.client.post(
+            "/envelopes/", {"name": "test", "total": 100.00, "user": self.user1.id}
+        )
         self.assertEqual(response.status_code, 403)
 
     def test_other_user_cannot_create_envelope_1(self):
@@ -133,11 +135,6 @@ class EnvelopeDELETEPermissionsTestCase(TestCase):
         response = self.client.delete(f"/envelopes/{self.envelope.id}/")
         self.assertEqual(response.status_code, 204)
         self.assertEqual(Envelope.objects.count(), 0)
-
-    def test_user_can_delete_own_envelope_2(self):
-        self.client.login(username="testuser1", password="12345")
-        response = self.client.delete(f"/envelopes/{self.envelope.id}/")
-        self.assertEqual(response.status_code, 204)
 
     def test_unauthenticated_user_cannot_delete_envelope(self):
         response = self.client.delete(f"/envelopes/{self.envelope.id}/")
@@ -249,6 +246,106 @@ class TransactionPOSTPermissionsTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 403)
         self.assertEqual(self.envelope.transactions.count(), 0)
+
+
+class TransactionPUTPermissionsTestCase(TestCase):
+    def setUp(self):
+        self.user1 = get_user_model().objects.create_user(
+            username="testuser1", password="12345"
+        )
+        self.user2 = get_user_model().objects.create_user(
+            username="testuser2", password="12345"
+        )
+        self.envelope = Envelope.objects.create(
+            name="test", total=100.00, user=self.user1
+        )
+        self.transaction = Transaction.objects.create(
+            date="2020-01-01",
+            amount=50.00,
+            name="test",
+            envelope=self.envelope,
+            notes="test",
+        )
+        self.client = Client()
+
+    def test_user_can_update_own_transaction(self):
+        self.client.login(username="testuser1", password="12345")
+        response = self.client.put(
+            f"/transactions/{self.transaction.id}/",
+            {
+                "date": "2020-01-01",
+                "amount": "100.00",
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.transaction.refresh_from_db()
+        self.assertEqual(self.transaction.amount, 100.00)
+
+    def test_unauthenticated_user_cannot_update_transaction(self):
+        response = self.client.put(
+            f"/transactions/{self.transaction.id}/",
+            {
+                "date": "2020-01-01",
+                "amount": "100.00",
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_other_user_cannot_update_transaction(self):
+        self.client.login(username="testuser2", password="12345")
+        response = self.client.put(
+            f"/transactions/{self.transaction.id}/",
+            {
+                "date": "2020-01-01",
+                "amount": "100.00",
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 404)
+
+
+class TransactionDELETEPermissionsTestCase(TestCase):
+    def setUp(self):
+        self.user1 = get_user_model().objects.create_user(
+            username="testuser1", password="12345"
+        )
+        self.user2 = get_user_model().objects.create_user(
+            username="testuser2", password="12345"
+        )
+        self.envelope = Envelope.objects.create(
+            name="test", total=100.00, user=self.user1
+        )
+        self.transaction = Transaction.objects.create(
+            date="2020-01-01",
+            amount=50.00,
+            name="test",
+            envelope=self.envelope,
+            notes="test",
+        )
+        self.client = Client()
+
+    def test_user_can_delete_own_transaction(self):
+        self.client.login(username="testuser1", password="12345")
+        response = self.client.delete(f"/transactions/{self.transaction.id}/")
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(Transaction.objects.count(), 0)
+
+    def test_unauthenticated_user_cannot_delete_transaction(self):
+        response = self.client.delete(f"/transactions/{self.transaction.id}/")
+        self.assertEqual(response.status_code, 403)
+
+    def test_other_user_cannot_delete_transaction(self):
+        self.client.login(username="testuser2", password="12345")
+        response = self.client.delete(f"/transactions/{self.transaction.id}/")
+        self.assertEqual(response.status_code, 404)
 
 
 class FillGETPermissionsTestCase(TestCase):
