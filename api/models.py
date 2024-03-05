@@ -32,7 +32,9 @@ class Transaction(models.Model):
     )
     name = models.CharField(max_length=100)
     notes = models.TextField(blank=True)
-    envelope = models.ForeignKey(Envelope, on_delete=models.CASCADE)
+    envelope = models.ForeignKey(
+        Envelope, related_name="transactions", on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return f"{self.name} - {self.envelope.user} - {self.date}"
@@ -46,7 +48,9 @@ class Fill(models.Model):
     )
     name = models.CharField(max_length=100)
     notes = models.TextField(blank=True)
-    envelope = models.ForeignKey(Envelope, on_delete=models.CASCADE)
+    envelope = models.ForeignKey(
+        Envelope, related_name="fills", on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return f"{self.name} - {self.envelope.user} - {self.date}"
