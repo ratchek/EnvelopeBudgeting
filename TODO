@@ -22,8 +22,8 @@ Check that permissions are properly configured:
     - [x] List a different user's transactions
     - [x] Create a transaction for a different user
     - [x] View a different user's transaction
-    - [ ] Update a different user's transaction
-    - [ ] Delete a different user's transaction
+    - [x] Update a different user's transaction
+    - [x] Delete a different user's transaction
 
 - [x] Check that only authenticated users can access API
 
