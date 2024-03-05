@@ -198,6 +198,59 @@ class TransactionGETPermissionsTestCase(TestCase):
         self.assertEqual(response.status_code, 404)
 
 
+class TransactionPOSTPermissionsTestCase(TestCase):
+    def setUp(self):
+        self.user1 = get_user_model().objects.create_user(
+            username="testuser1", password="12345"
+        )
+        self.user2 = get_user_model().objects.create_user(
+            username="testuser2", password="12345"
+        )
+        self.envelope = Envelope.objects.create(
+            name="test", total=100.00, user=self.user1
+        )
+        self.client = Client()
+
+    def test_user_can_create_transaction(self):
+        self.client.login(username="testuser1", password="12345")
+        response = self.client.post(
+            "/transactions/",
+            {
+                "date": "2020-01-01",
+                "amount": 50.00,
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+        )
+        self.assertEqual(response.status_code, 201)
+
+    def test_unauthenticated_user_cannot_create_transaction(self):
+        response = self.client.post(
+            "/transactions/",
+            {
+                "date": "2020-01-01",
+                "amount": 50.00,
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_other_user_cannot_create_transaction(self):
+        self.client.login(username="testuser2", password="12345")
+        response = self.client.post(
+            "/transactions/",
+            {
+                "date": "2020-01-01",
+                "amount": 50.00,
+                "name": "test",
+                "envelope": self.envelope.id,
+            },
+        )
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(self.envelope.transactions.count(), 0)
+
+
 class FillGETPermissionsTestCase(TestCase):
     def setUp(self):
         self.user1 = get_user_model().objects.create_user(

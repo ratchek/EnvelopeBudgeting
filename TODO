@@ -14,13 +14,13 @@ Check that permissions are properly configured:
     - [x] Delete a different user's envelope
 
     - [x] List a different user's fills
-    - [ ] Create an fill for a different user
+    - [ ] Create a fill for a different user
     - [x] View a different user's fill
     - [ ] Update a different user's fill
     - [ ] Delete a different user's fill
 
     - [x] List a different user's transactions
-    - [ ] Create an transaction for a different user
+    - [x] Create a transaction for a different user
     - [x] View a different user's transaction
     - [ ] Update a different user's transaction
     - [ ] Delete a different user's transaction

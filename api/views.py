@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import exceptions, generics, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -42,6 +42,13 @@ class TransactionList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return Transaction.objects.filter(envelope__user=self.request.user)
+
+    def perform_create(self, serializer):
+        if serializer.validated_data["envelope"].user != self.request.user:
+            raise exceptions.PermissionDenied(
+                "User must own envelope to create transaction."
+            )
+        serializer.save()
 
 
 class TransactionDetail(generics.RetrieveUpdateDestroyAPIView):
