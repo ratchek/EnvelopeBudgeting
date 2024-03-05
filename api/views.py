@@ -1,9 +1,10 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
 from .models import Envelope, Fill, Transaction
+from .permissions import IsEnvelopeOwner
 from .serializers import EnvelopeSerializer, FillSerializer, TransactionSerializer
 
 
@@ -30,6 +31,7 @@ class EnvelopeList(generics.ListCreateAPIView):
 
 class EnvelopeDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = EnvelopeSerializer
+    permission_classes = [permissions.IsAuthenticated, IsEnvelopeOwner]
 
     def get_queryset(self):
         return Envelope.objects.filter(user=self.request.user)
