@@ -1,13 +1,14 @@
 
 Check if API follows specs in docs
 - [ ] Make API follow docs in splitting the total amounts into dollars and cents
+- [ ] Should the user field for envelopes even be a thing in the docs?
 
 
 
 Check that permissions are properly configured:
     Check that a user cannot:
     - [x] List a different user's envelopes
-    - [ ] Create an envelope for a different user
+    - [x] Create an envelope for a different user
     - [x] View a different user's envelope
     - [x] Update a different user's envelope
     - [x] Delete a different user's envelope

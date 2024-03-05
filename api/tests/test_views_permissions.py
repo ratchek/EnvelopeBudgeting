@@ -65,6 +65,13 @@ class EnvelopePOSTPermissionsTestCase(TestCase):
         response = self.client.post("/envelopes/", {"name": "test", "total": 100.00})
         self.assertEqual(response.status_code, 403)
 
+    def test_other_user_cannot_create_envelope_1(self):
+        self.client.login(username="testuser2", password="12345")
+        _ = self.client.post(
+            "/envelopes/", {"name": "test", "total": 100.00, "user": self.user1.id}
+        )
+        self.assertEqual(self.user1.envelopes.count(), 0)
+
 
 class EnvelopePUTPermissionsTestCase(TestCase):
     def setUp(self):
