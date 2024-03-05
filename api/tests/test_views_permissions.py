@@ -108,6 +108,40 @@ class EnvelopePUTPermissionsTestCase(TestCase):
         self.assertEqual(response.status_code, 404)
 
 
+class EnvelopeDELETEPermissionsTestCase(TestCase):
+    def setUp(self):
+        self.user1 = get_user_model().objects.create_user(
+            username="testuser1", password="12345"
+        )
+        self.user2 = get_user_model().objects.create_user(
+            username="testuser2", password="12345"
+        )
+        self.envelope = Envelope.objects.create(
+            name="test", total=100.00, user=self.user1
+        )
+        self.client = Client()
+
+    def test_user_can_delete_own_envelope(self):
+        self.client.login(username="testuser1", password="12345")
+        response = self.client.delete(f"/envelopes/{self.envelope.id}/")
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(Envelope.objects.count(), 0)
+
+    def test_user_can_delete_own_envelope_2(self):
+        self.client.login(username="testuser1", password="12345")
+        response = self.client.delete(f"/envelopes/{self.envelope.id}/")
+        self.assertEqual(response.status_code, 204)
+
+    def test_unauthenticated_user_cannot_delete_envelope(self):
+        response = self.client.delete(f"/envelopes/{self.envelope.id}/")
+        self.assertEqual(response.status_code, 403)
+
+    def test_other_user_cannot_delete_envelope(self):
+        self.client.login(username="testuser2", password="12345")
+        response = self.client.delete(f"/envelopes/{self.envelope.id}/")
+        self.assertEqual(response.status_code, 404)
+
+
 class TransactionGETPermissionsTestCase(TestCase):
     def setUp(self):
         self.user1 = get_user_model().objects.create_user(
