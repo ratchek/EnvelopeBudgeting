@@ -24,7 +24,7 @@ class EnvelopeGETPermissionsTestCase(TestCase):
 
     def test_unauthenticated_user_cannot_view_envelopes_list(self):
         response = self.client.get("/envelopes/")
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_view_envelopes_list(self):
         self.client.login(username="testuser2", password="12345")
@@ -38,7 +38,7 @@ class EnvelopeGETPermissionsTestCase(TestCase):
 
     def test_unauthenticated_user_cannot_view_envelopes(self):
         response = self.client.get(f"/envelopes/{self.envelope.id}/")
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_view_envelopes(self):
         self.client.login(username="testuser2", password="12345")
@@ -65,7 +65,7 @@ class EnvelopePOSTPermissionsTestCase(TestCase):
         response = self.client.post(
             "/envelopes/", {"name": "test", "total": 100.00, "user": self.user1.id}
         )
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_create_envelope_1(self):
         self.client.login(username="testuser2", password="12345")
@@ -105,7 +105,7 @@ class EnvelopePUTPermissionsTestCase(TestCase):
             {"name": "test", "total": "200.00"},
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_update_envelope(self):
         self.client.login(username="testuser2", password="12345")
@@ -138,7 +138,7 @@ class EnvelopeDELETEPermissionsTestCase(TestCase):
 
     def test_unauthenticated_user_cannot_delete_envelope(self):
         response = self.client.delete(f"/envelopes/{self.envelope.id}/")
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_delete_envelope(self):
         self.client.login(username="testuser2", password="12345")
@@ -173,7 +173,7 @@ class TransactionGETPermissionsTestCase(TestCase):
 
     def test_unauthenticated_user_cannot_view_transactions_list(self):
         response = self.client.get("/transactions/")
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_view_transactions_list(self):
         self.client.login(username="testuser2", password="12345")
@@ -187,7 +187,7 @@ class TransactionGETPermissionsTestCase(TestCase):
 
     def test_unauthenticated_user_cannot_view_transactions(self):
         response = self.client.get(f"/transactions/{self.transaction.id}/")
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_view_transactions(self):
         self.client.login(username="testuser2", password="12345")
@@ -231,7 +231,7 @@ class TransactionPOSTPermissionsTestCase(TestCase):
                 "envelope": self.envelope.id,
             },
         )
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_create_transaction(self):
         self.client.login(username="testuser2", password="12345")
@@ -295,7 +295,7 @@ class TransactionPUTPermissionsTestCase(TestCase):
             },
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_update_transaction(self):
         self.client.login(username="testuser2", password="12345")
@@ -340,7 +340,7 @@ class TransactionDELETEPermissionsTestCase(TestCase):
 
     def test_unauthenticated_user_cannot_delete_transaction(self):
         response = self.client.delete(f"/transactions/{self.transaction.id}/")
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_delete_transaction(self):
         self.client.login(username="testuser2", password="12345")
@@ -375,7 +375,7 @@ class FillGETPermissionsTestCase(TestCase):
 
     def test_unauthenticated_user_cannot_view_fills_list(self):
         response = self.client.get("/fills/")
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_user_cannot_view_other_users_fills_list(self):
         self.client.login(username="testuser2", password="12345")
@@ -389,7 +389,7 @@ class FillGETPermissionsTestCase(TestCase):
 
     def test_unauthenticated_user_cannot_view_fills(self):
         response = self.client.get(f"/fills/{self.fill.id}/")
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_user_cannot_view_other_users_fills(self):
         self.client.login(username="testuser2", password="12345")
@@ -433,7 +433,7 @@ class FillPOSTPermissionsTestCase(TestCase):
                 "envelope": self.envelope.id,
             },
         )
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_create_fill(self):
         self.client.login(username="testuser2", password="12345")
@@ -497,7 +497,7 @@ class FillPUTPermissionsTestCase(TestCase):
             },
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_update_fill(self):
         self.client.login(username="testuser2", password="12345")
@@ -542,7 +542,7 @@ class FillDELETEPermissionsTestCase(TestCase):
 
     def test_unauthenticated_user_cannot_delete_fill(self):
         response = self.client.delete(f"/fills/{self.fill.id}/")
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_other_user_cannot_delete_fill(self):
         self.client.login(username="testuser2", password="12345")

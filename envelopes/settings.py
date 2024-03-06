@@ -126,8 +126,16 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
-    ]
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
 }
+
+if DEVELOPMENT_MODE:
+    REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] += [
+        "rest_framework.authentication.SessionAuthentication",
+    ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

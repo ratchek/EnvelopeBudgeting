@@ -14,3 +14,8 @@ pip install -r requirements_dev.txt
 ./manage.py runserver
 ```
 The site should be running on http://localhost:8000/
+
+
+## Authenticating with JWT
+This project uses the simple-jwt library. Here's how to authenticate requests:
+https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#usage
