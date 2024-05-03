@@ -30,3 +30,8 @@ Check that permissions are properly configured:
 
 - [x] Allow user to create envelopes without passing the user id explicitly
 - [ ] Modify docs and add tests to be in line with the above
+- [ ] Delete basic authentication option from production settings
+- [ ] Add JWT endpoints to documentation
+
+- [ ] Pagination?
+- [ ] Filtering?
