@@ -17,7 +17,7 @@ urlpatterns = [
     path("fills/", views.FillList.as_view(), name="fill-list"),
     path("fills/<int:pk>/", views.FillDetail.as_view(), name="fill-detail"),
     path("", views.api_root),
-    path("deploy/secret/", lambda request: HttpResponse("Super secret deploy test")),
+    path("deploy/secret/", lambda request: HttpResponse("Super secret deploy test #2")),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
