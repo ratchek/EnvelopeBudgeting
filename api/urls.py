@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -16,6 +17,7 @@ urlpatterns = [
     path("fills/", views.FillList.as_view(), name="fill-list"),
     path("fills/<int:pk>/", views.FillDetail.as_view(), name="fill-detail"),
     path("", views.api_root),
+    path("deploy/secret/", lambda request: HttpResponse("Super secret deploy test")),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
