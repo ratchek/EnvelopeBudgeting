@@ -46,12 +46,12 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Envelope"
+                  $ref: "#/components/schemas/EnvelopeResponse"
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Envelope"
+                  $ref: "#/components/schemas/EnvelopeResponse"
     post:
       tags:
         - envelope
@@ -64,20 +64,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Envelope"
+              $ref: "#/components/schemas/EnvelopeRequest"
           application/xml:
             schema:
-              $ref: "#/components/schemas/Envelope"
+              $ref: "#/components/schemas/EnvelopeRequest"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Envelope"
+                $ref: "#/components/schemas/EnvelopeResponse"
             application/xml:
               schema:
-                $ref: "#/components/schemas/Envelope"
+                $ref: "#/components/schemas/EnvelopeResponse"
         "400":
           description: Invalid envelope supplied
   /envelopes/{envelopeID}:
@@ -101,10 +101,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Envelope"
+                $ref: "#/components/schemas/EnvelopeResponse"
             application/xml:
               schema:
-                $ref: "#/components/schemas/Envelope"
+                $ref: "#/components/schemas/EnvelopeResponse"
         "400":
           description: Invalid ID supplied
         "404":
@@ -129,20 +129,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Envelope"
+              $ref: "#/components/schemas/EnvelopeRequest"
           application/xml:
             schema:
-              $ref: "#/components/schemas/Envelope"
+              $ref: "#/components/schemas/EnvelopeRequest"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Envelope"
+                $ref: "#/components/schemas/EnvelopeResponse"
             application/xml:
               schema:
-                $ref: "#/components/schemas/Envelope"
+                $ref: "#/components/schemas/EnvelopeResponse"
         "400":
           description: Invalid ID supplied
         "404":
@@ -183,12 +183,12 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Transaction"
+                  $ref: "#/components/schemas/TransactionResponse"
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Transaction"
+                  $ref: "#/components/schemas/TransactionResponse"
     post:
       tags:
         - transaction
@@ -201,20 +201,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Transaction"
+              $ref: "#/components/schemas/TransactionRequest"
           application/xml:
             schema:
-              $ref: "#/components/schemas/Transaction"
+              $ref: "#/components/schemas/TransactionRequest"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Transaction"
+                $ref: "#/components/schemas/TransactionResponse"
             application/xml:
               schema:
-                $ref: "#/components/schemas/Transaction"
+                $ref: "#/components/schemas/TransactionResponse"
         "400":
           description: Invalid transaction supplied
   /transactions/{transactionID}:
@@ -238,10 +238,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Transaction"
+                $ref: "#/components/schemas/TransactionResponse"
             application/xml:
               schema:
-                $ref: "#/components/schemas/Transaction"
+                $ref: "#/components/schemas/TransactionResponse"
         "400":
           description: Invalid ID supplied
         "404":
@@ -266,20 +266,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Transaction"
+              $ref: "#/components/schemas/TransactionRequest"
           application/xml:
             schema:
-              $ref: "#/components/schemas/Transaction"
+              $ref: "#/components/schemas/TransactionRequest"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Transaction"
+                $ref: "#/components/schemas/TransactionResponse"
             application/xml:
               schema:
-                $ref: "#/components/schemas/Transaction"
+                $ref: "#/components/schemas/TransactionResponse"
         "400":
           description: Invalid ID supplied
         "404":
@@ -320,12 +320,12 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Fill"
+                  $ref: "#/components/schemas/FillResponse"
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Fill"
+                  $ref: "#/components/schemas/FillResponse"
     post:
       tags:
         - fill
@@ -338,20 +338,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Fill"
+              $ref: "#/components/schemas/FillRequest"
           application/xml:
             schema:
-              $ref: "#/components/schemas/Fill"
+              $ref: "#/components/schemas/FillRequest"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Fill"
+                $ref: "#/components/schemas/FillResponse"
             application/xml:
               schema:
-                $ref: "#/components/schemas/Fill"
+                $ref: "#/components/schemas/FillResponse"
         "400":
           description: Invalid fill supplied
   /fills/{fillID}:
@@ -375,10 +375,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Fill"
+                $ref: "#/components/schemas/FillResponse"
             application/xml:
               schema:
-                $ref: "#/components/schemas/Fill"
+                $ref: "#/components/schemas/FillResponse"
         "400":
           description: Invalid ID supplied
         "404":
@@ -403,20 +403,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Fill"
+              $ref: "#/components/schemas/FillRequest"
           application/xml:
             schema:
-              $ref: "#/components/schemas/Fill"
+              $ref: "#/components/schemas/FillRequest"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Fill"
+                $ref: "#/components/schemas/FillResponse"
             application/xml:
               schema:
-                $ref: "#/components/schemas/Fill"
+                $ref: "#/components/schemas/FillResponse"
         "400":
           description: Invalid ID supplied
         "404":
@@ -445,13 +445,9 @@ paths:
 
 components:
   schemas:
-    Envelope:
+    EnvelopeBase:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 123456
         name:
           type: string
           example: utilities
@@ -463,21 +459,22 @@ components:
           type: integer
           format: int32
           example: 15
-        user:
-          type: integer
-          format: int32
-          example: 2
-    Transaction:
+    EnvelopeResponse:
+      allOf:
+        - $ref: "#/components/schemas/EnvelopeBase"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 123456
+    EnvelopeRequest:
+      allOf:
+        - $ref: "#/components/schemas/EnvelopeBase"
+        - type: object
+    TransactionBase:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 123456
-        envelopeID:
-          type: integer
-          format: int64
-          example: 123456
         name:
           type: string
           example: electric bill
@@ -496,17 +493,22 @@ components:
         notes:
           type: string
           example: paid with credit card
-    Fill:
+    TransactionResponse:
+      allOf:
+        - $ref: "#/components/schemas/TransactionBase"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 123456
+    TransactionRequest:
+      allOf:
+        - $ref: "#/components/schemas/TransactionBase"
+        - type: object
+    FillBase:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 123456
-        envelopeID:
-          type: integer
-          format: int64
-          example: 123456
         name:
           type: string
           example: salary deposit
@@ -525,3 +527,16 @@ components:
         notes:
           type: string
           example: paid with credit card
+    FillResponse:
+      allOf:
+        - $ref: "#/components/schemas/FillBase"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 123456
+    FillRequest:
+      allOf:
+        - $ref: "#/components/schemas/FillBase"
+        - type: object
