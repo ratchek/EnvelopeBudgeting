@@ -4,3 +4,6 @@ staticfiles/
 settings.ini
 *.pyc
 db.sqlite3
+
+# Bruno files
+api-testing/
