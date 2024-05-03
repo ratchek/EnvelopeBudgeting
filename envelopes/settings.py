@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     "api",
 ]
 
+if DEVELOPMENT_MODE:
+    INSTALLED_APPS += ["django_extensions"]
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
